@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodeman index.js",
+    "dev": "nodemon index.js",
     "test": "\"echo \\\"Error: no test specified\\\" && exit 1\""
   },
   "author": "Jione",
   "license": "MIT",
   "devDependencies": {
-    "nodeman": "^1.1.2"
+    "nodemon": "^2.0.20"
   },
   "dependencies": {
     "express": "^4.18.2"
