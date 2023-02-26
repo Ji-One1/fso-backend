@@ -30,12 +30,11 @@ app.get("/api/persons", (request, response) => {
 
 app.get('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
-    console.log(id)
-    if (!persons.some(person => person.id == id)){
+    if (!persons.some(person => person.id === id)){
         return response.status(404).end()
     }
 
-    const person = persons.find(person => person.id == id)
+    const person = persons.find(person => person.id === id)
     response.json(person)
 })
 
@@ -49,6 +48,16 @@ app.get("/info", (request, response) => {
         + "<div>" + date + "</div"
     )
 })
+
+app.delete('/api/persons/:id', (request, response) => {
+    const id = Number(request.params.id)
+    persons = persons.filter(person => person.id !== id)
+    console.log(persons);
+    response.status(204).end()
+
+})
+
+
 
 
 
