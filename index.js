@@ -3,6 +3,7 @@ const morgan = require('morgan')
 const app = express()
 
 app.use(express.json())
+app.use(express.static('build'))
 
 morgan.token('content',  function (req, res){
     if (!req.body.name){
@@ -89,7 +90,8 @@ app.post('/api/persons', (request, response) => {
   }
 
   persons = persons.concat(person)
-  response.json(persons)
+  console.log(persons);
+  response.json(person)
 })
 
 app.delete('/api/persons/:id', (request, response) => {
@@ -101,9 +103,7 @@ app.delete('/api/persons/:id', (request, response) => {
 
 
 
-
-
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
