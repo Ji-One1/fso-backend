@@ -1,10 +1,10 @@
-POST https://aged-river-4740.fly.dev/api/persons/ HTTP/1.1
+PUT  https://aged-river-4740.fly.dev/api/persons/64003f097219eafbd76fd59b HTTP/1.1
 Content-Type: application/json 
 
 {
     "name": "Micheal",
-    "number": "51124667"
+    "number": "1"
 }
 ###
-DELETE https://aged-river-4740.fly.dev/api/persons/640039dbabc463c0bb27a298
+GET https://aged-river-4740.fly.dev/info
 

@@ -31,6 +31,16 @@ app.use(errorHandler)
 
 
 
+app.get('/info', (request, response) => {
+    Contact.countDocuments({}).then(count => {
+        date = Date()
+        formatString = `<div>Phonebook has info for ${count} people</div><div>${date}</div>`
+        response.send(formatString)
+    })
+})
+
+
+
 app.get("/api/persons", (request, response) => {
     Contact.find({})
         .then(result => response.json(result))
