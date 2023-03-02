@@ -41,21 +41,15 @@ app.post('/api/persons', (request, response) => {
     return response.status(400).json({ 
       error: 'content missing' 
     })
-  } else if (persons.some(person => person.name === body.name)){
-    return response.status(400).json({ 
-        error: 'name already in phonebook!' 
-      })
-  }
+  } 
 
-  const person = {
+  const person = new Contact({
     name: body.name,
     number: body.number,
     id: generateId(),
-  }
+  })
 
-  persons = persons.concat(person)
-  console.log(persons);
-  response.json(person)
+  person.save().then(result => response.json(result))
 })
 
 app.delete('/api/persons/:id', (request, response) => {
