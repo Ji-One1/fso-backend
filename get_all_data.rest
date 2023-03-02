@@ -6,4 +6,4 @@ Content-Type: application/json
     "number": "51442124667"
 }
 ###
-GET http://localhost:3001/api/persons/
+GET https://aged-river-4740.fly.dev/api/persons/
