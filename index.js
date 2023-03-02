@@ -30,25 +30,10 @@ app.get("/api/persons", (request, response) => {
 })
 
 app.get('/api/persons/:id', (request, response) => {
-    const id = Number(request.params.id)
-    if (!persons.some(person => person.id === id)){
-        return response.status(404).end()
-    }
-
-    const person = persons.find(person => person.id === id)
-    response.json(person)
+    const id = request.params.id
+    Contact.findById(id).then(contact => response.json(contact))
 })
 
-
-app.get("/info", (request, response) => {
-    const arrayLength = persons.length
-    const date = Date()
-
-    response.send(
-        "<div>Phonebook has info for " + arrayLength + " people</div>"
-        + "<div>" + date + "</div"
-    )
-})
 
 app.post('/api/persons', (request, response) => {
     const body = request.body
