@@ -34,6 +34,7 @@ app.use(errorHandler)
 app.get("/api/persons", (request, response) => {
     Contact.find({})
         .then(result => response.json(result))
+        .catch(err => next(err))
 
 })
 
@@ -41,6 +42,7 @@ app.get('/api/persons/:id', (request, response) => {
     const id = request.params.id
     Contact.findById(id)
         .then(contact => response.json(contact))
+        .catch(err => next(err))
 })
 
 
@@ -59,7 +61,18 @@ app.post('/api/persons', (request, response) => {
 
   person.save()
     .then(result => response.json(result))
+    .catch(err => next(err))
 })
+
+app.put('/api/persons/:id', (request, response) => {
+    const id = request.params.id
+    const body = request.body
+    Contact.findByIdAndUpdate(id, body,{ new: true })
+        .then(result => response.json(result))
+        .catch(error => next(error))
+})
+
+
 
 app.delete('/api/persons/:id', (request, response) => {
     const id = request.params.id
