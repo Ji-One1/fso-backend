@@ -16,22 +16,31 @@ morgan.token('content',  function (req, res){
 })
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :content'))
 
+const errorHandler = (error, request, response, next) => {
+    console.error(error.message)
+  
+    if (error.name === 'CastError') {
+      return response.status(400).send({ error: 'malformatted id' })
+    } 
+  
+    next(error)
+  }
+  
+app.use(errorHandler)
 
 
-
-const generateId = () => {
-    return Math.floor(Math.random() * 1000000000);
-}
 
 
 app.get("/api/persons", (request, response) => {
-    Contact.find({}).then(result => response.json(result))
+    Contact.find({})
+        .then(result => response.json(result))
 
 })
 
 app.get('/api/persons/:id', (request, response) => {
     const id = request.params.id
-    Contact.findById(id).then(contact => response.json(contact))
+    Contact.findById(id)
+        .then(contact => response.json(contact))
 })
 
 
@@ -46,16 +55,17 @@ app.post('/api/persons', (request, response) => {
   const person = new Contact({
     name: body.name,
     number: body.number,
-    id: generateId(),
   })
 
-  person.save().then(result => response.json(result))
+  person.save()
+    .then(result => response.json(result))
 })
 
 app.delete('/api/persons/:id', (request, response) => {
-    const id = Number(request.params.id)
-    persons = persons.filter(person => person.id !== id)
-    response.status(204).end()
+    const id = request.params.id
+    Contact.findByIdAndRemove(request.params.id)
+        .then(result => response.status(204).end())
+        .catch(err => next(error))
 
 })
 

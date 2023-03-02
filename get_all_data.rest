@@ -1,9 +1,10 @@
-POST http://localhost:3001/api/persons/ HTTP/1.1
+POST https://aged-river-4740.fly.dev/api/persons/ HTTP/1.1
 Content-Type: application/json 
 
 {
-    "name": "Jason",
-    "number": "51442124667"
+    "name": "Micheal",
+    "number": "51124667"
 }
 ###
-GET https://aged-river-4740.fly.dev/api/persons/
+DELETE https://aged-river-4740.fly.dev/api/persons/640039dbabc463c0bb27a298
+
