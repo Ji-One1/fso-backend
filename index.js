@@ -1,9 +1,12 @@
 require('dotenv').config()
+const cors = require('cors')
+
+
 const express = require("express")
 const morgan = require('morgan')
 const Contact = require('./models/mongo')
 const app = express()
-
+app.use(cors())
 app.use(express.json())
 app.use(express.static('build'))
 
@@ -17,13 +20,9 @@ morgan.token('content',  function (req, res){
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :content'))
 
 const errorHandler = (error, request, response, next) => {
-    console.error(error.message)
-  
     if (error.name === 'CastError') {
       return response.status(400).send({ error: 'malformatted id' })
-    } else if (error.name === 'ValidationError'){
-      return response.status(400).json({ error: error.message})
-    }
+    } 
   
     next(error)
   }
@@ -62,10 +61,9 @@ app.post('/api/persons', (request, response, next) => {
     const body = request.body
   if (!body.name || !body.number) {
     return response.status(400).json({ 
-      error: 'content missing' 
+      error: 'Missing Contact Info' 
     })
   } 
-
   const person = new Contact({
     name: body.name,
     number: body.number,
@@ -73,7 +71,12 @@ app.post('/api/persons', (request, response, next) => {
 
   person.save()
     .then(result => response.json(result))
-    .catch(err => next(err))
+    .catch(err => {
+      if (err.name === 'ValidationError'){
+        console.log(err);
+        return response.status(400).json({ error: err.message})
+      }
+    })
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
