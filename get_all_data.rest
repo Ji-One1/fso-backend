@@ -1,10 +1,15 @@
-PUT  https://aged-river-4740.fly.dev/api/persons/64003f097219eafbd76fd59b HTTP/1.1
+POST  https://aged-river-4740.fly.dev/api/persons/64003f097219eafbd76fd59b HTTP/1.1
 Content-Type: application/json 
 
 {
-    "name": "Micheal",
+    "name": "Mi",
     "number": "1"
 }
 ###
-GET https://aged-river-4740.fly.dev/info
+POST https://localhost:3001
+Content-Type: application/json 
 
+{
+    "name": "Mi",
+    "number": "1"
+}

@@ -16,7 +16,16 @@ const contactSchema = new mongoose.Schema({
       minLength: 3,
       required: true
     },
-    number: String,
+    number: {
+      type: String,
+      minLength: 8,
+      required: true,
+      validate: {
+        validator: function(v) {
+          return /\d{2}-\d+/.test(v) || /\d{3}-\d+/.test(v);
+        }
+    },
+  }
 })
 
 contactSchema.set('toJSON', {
