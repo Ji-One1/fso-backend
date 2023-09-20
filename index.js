@@ -1,12 +1,10 @@
 require('dotenv').config()
-const cors = require('cors')
 
 
 const express = require("express")
 const morgan = require('morgan')
 const Contact = require('./models/mongo')
 const app = express()
-app.use(cors())
 app.use(express.json())
 app.use(express.static('build'))
 
