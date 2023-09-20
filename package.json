@@ -16,6 +16,7 @@
   "license": "MIT",
   "devDependencies": {
     "eslint": "^8.49.0",
+    "eslint-plugin-react": "^7.33.2",
     "nodemon": "^2.0.20"
   },
   "dependencies": {
