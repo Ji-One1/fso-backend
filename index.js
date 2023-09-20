@@ -49,7 +49,6 @@ app.get('/api/persons/:id', (request, response, next) => {
 
 app.post('/api/persons', (request, response, next) => {
     const body = request.body
-    console.log('Post Request Triggered');
   if (!body.name || !body.number) {
     return response.status(400).json({ 
       error: 'Missing Contact Info' 
@@ -63,7 +62,6 @@ app.post('/api/persons', (request, response, next) => {
   person.save()
     .then(result => response.json(result))
     .catch(error =>  {
-      console.log(error, 'Error Object');
       next(error)})
 })
 
